@@ -1,0 +1,16 @@
+Trenton Leland 
+
+ README questions
+
+1. Why does `minTemp` start at 7FFFFFFFh instead of 0? What goes wrong with 0 on tonight's data?
+
+	It starts at 7FFFFFFFh because the system needs a value to replace its starting value. The number would also not have to be able to show up. 7FFFFFFFh is the biggest 32-Bit number that would make every real temperature real.
+	If it started at 0 then TODO #3 would then essentially skip numbers that are positive.
+  
+2. TODO 2 sums into `AL` — no `AND 0FFh` anywhere. Where is the mod-256?
+
+	The mod-256 comes from the 'AL' 8-bit register. 
+
+3. The outer loop uses `INC/CMP/JL` while the inner uses `LOOP`. Why would using `LOOP` for both be dangerous?
+
+	The loop uses ecx as the counter, the outer loop and inner loop would be conflicting over one another for the same register. Once the inner loop counted down to 0 then the outer loop would destroy the count. 
